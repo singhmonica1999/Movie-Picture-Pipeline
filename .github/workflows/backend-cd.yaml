@@ -8,9 +8,8 @@ on:
 
 env:
   PYTHON_VERSION: "3.10"
-  SRC_DIR: "${{ github.workspace }}/src/backend/"
   K8_DIR: "${{ github.workspace }}/src/backend/k8s"
-  ECR_REPO: "646184429643.dkr.ecr.us-east-1.amazonaws.com/backend"
+  ECR_REPO: "925938533437.dkr.ecr.us-east-1.amazonaws.com/backend"
   AWS_REGION: "us-east-1"
 
 jobs:
@@ -31,7 +30,7 @@ jobs:
 
       - name: Install dependencies and lint
         run: |
-          cd ${{env.SRC_DIR}}
+          cd satrter/backend
           pipenv install --dev
           pipenv run lint
   test:
@@ -51,7 +50,7 @@ jobs:
 
       - name: Install dependencies and lint
         run: |
-          cd ${{env.SRC_DIR}}
+          cd starter/backend
           pipenv install --dev
           pipenv run lint
   build-deploy:
@@ -79,7 +78,7 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
 
         run: |
-          cd ${{env.SRC_DIR}}
+          cd starter/backend
           docker build --tag=$REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
@@ -95,7 +94,7 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
           KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
         run: |
-          cd ${{env.K8_DIR}}
+          cd starter/backend/k8s
           aws eks update-kubeconfig --name=cluster
           echo "backend=$REGISTRY/$REPOSITORY:$IMAGE_TAG"
 
