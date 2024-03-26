@@ -8,7 +8,6 @@ on:
 
 env:
   PYTHON_VERSION: "3.10"
-  K8_DIR: "${{ github.workspace }}/src/backend/k8s"
   ECR_REPO: "925938533437.dkr.ecr.us-east-1.amazonaws.com/backend"
   AWS_REGION: "us-east-1"
 

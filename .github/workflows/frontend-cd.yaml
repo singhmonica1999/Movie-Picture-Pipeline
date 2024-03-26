@@ -8,8 +8,6 @@ on:
 
 env:
   NODE_VERSION: "latest"
-  SRC_DIR: "${{ github.workspace }}/src/frontend/"
-  K8_DIR: "${{ github.workspace }}/src/frontend/k8s"
   AWS_REGION: "us-east-1"
 
 jobs:
